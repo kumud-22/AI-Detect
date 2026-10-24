@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#030405" />
-  <title>AI DETECT | AI Control Center</title>
+  <title>AI-Detect | Real-Time Object Detection</title>
 
   <style>
     :root {
@@ -340,6 +340,9 @@
     .stat-note { margin-top: 5px; color: var(--accent); font-size: 10px; }
 
     .detection-list { display: grid; gap: 10px; }
+    .detection-panel { min-width: 0; align-self: stretch; }
+    .detection-panel .panel-body { max-height: min(68vh, 680px); overflow-y: auto; }
+    .detection-panel .empty-state { padding: 28px 10px; }
 
     .detection-item {
       padding: 12px;
@@ -694,7 +697,7 @@
       <div class="brand">
         <div class="brand-icon">⌁</div>
         <div class="brand-copy">
-          <div class="brand-name">VISION LAB</div>
+          <div class="brand-name">AI DETECT</div>
           <div class="brand-sub">AI CONTROL CENTER</div>
         </div>
       </div>
@@ -759,9 +762,9 @@
       <section class="cinematic-hero" aria-label="Vision Lab introduction">
         <div class="hero-copy">
           <div class="hero-eyebrow"><span class="hero-pulse"></span> A NEW ERA OF COMPUTER VISION</div>
-          <h2 class="hero-title">VISION<span>LAB</span></h2>
+          <h2 class="hero-title">AI<span>DETECT</span></h2>
           <p class="hero-tagline">WHERE THE REAL WORLD<br />MEETS <strong>INTELLIGENCE</strong></p>
-          <p class="hero-description">Real-time object detection, powered by AI. See more. Understand faster.</p>
+          <p class="hero-description">Real-time object detection, powered by AI. See objects more clearly.</p>
           <button class="hero-cta" type="button" data-go="vision"><span>↗</span> ENTER LIVE VISION</button>
           <div class="hero-footnote"><span class="hero-line"></span> AI CONTROL CENTER <span class="hero-separator">/</span> REAL-TIME INFERENCE</div>
         </div>
@@ -826,6 +829,21 @@
               </div>
             </div>
           </div>
+
+          <aside class="panel detection-panel" aria-label="Live detections">
+            <div class="panel-head">
+              <div>
+                <h2>Live detections</h2>
+                <div class="muted" style="margin-top:5px">Objects returned by the active model</div>
+              </div>
+              <span class="status-chip" id="visibleCount">0 items</span>
+            </div>
+            <div class="panel-body">
+              <div id="detectionList" class="detection-list" aria-live="polite">
+                <div class="empty-state">Start the camera to see detected objects and confidence scores.</div>
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -1104,8 +1122,6 @@
       -->
       <div class="compat-hidden" aria-hidden="true">
         <span id="totalDetections">0</span>
-        <span id="visibleCount">0 items</span>
-        <div id="detectionList"></div>
         <span id="uniqueClasses">0</span>
         <span id="dashClasses">0</span>
 
